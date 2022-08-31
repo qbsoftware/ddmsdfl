@@ -1,0 +1,109 @@
+{% load i18n cache cms_tags menu_tags leprikon_tags sekizai_tags staticfiles ganalytics %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Františkovy Lázně, Dům dětí a mládeže, školní družina, kroužky pro děti, příměstské tábory, mimoškolní činnost" />
+        <meta name="description" content="Oficiální stránky Domu dětí a mládeže a školní družiny Františkovy Lázně" />
+
+        <meta property="og:url"           content="https://www.ddmsdfl.cz/28/Pracovni-mista/" />
+        <meta property="og:type"          content="website" />
+        <meta property="og:title"         content="Pracovní místa | DDM a ŠD Františkovy Lázně" />
+        <meta property="og:description"   content="Oficiální stránky Domu dětí a mládeže a školní družiny Františkovy Lázně" />
+        <meta property="og:image"         content="https://www.ddmsdfl.cz/images/ogImage.jpg" />
+
+        <link rel="shortcut icon" href="https://www.ddmsdfl.cz/images/favicon_128.png" />
+        <link rel="shortcut icon" href="https://www.ddmsdfl.cz/images/favicon_180.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="https://www.ddmsdfl.cz/images/favicon_180.png" />
+        <link href="https://www.ddmsdfl.cz/images/favicon_256.png" sizes="256x256" rel="icon" type="image/png" />
+        <link href="https://www.ddmsdfl.cz/images/favicon_180.png" sizes="180x180" rel="icon" type="image/png" />
+        <link href="https://www.ddmsdfl.cz/images/favicon_128.png" sizes="128x128" rel="icon" type="image/png" />
+        <link href="https://www.ddmsdfl.cz/images/favicon_64.png" sizes="64x64" rel="icon" type="image/png" />
+        <link href="https://www.ddmsdfl.cz/images/favicon_32.png" sizes="32x32" rel="icon" type="image/png" />
+        <link href="https://www.ddmsdfl.cz/images/favicon_32.png" rel="icon" type="image/png" />
+
+	<meta name="robots" content="index,follow" />
+	<meta name="googlebot" content="index,follow,snippet,archive" />
+        <title>{% block title %}{% endblock %} {% include 'leprikon/title.txt' %}</title>
+        <!--<link href="https://www.ddmsdfl.cz/images/favicon.png" rel="icon" type="image/png" />-->
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="{% static 'leprikon/lib/bootstrap/css/bootstrap.min.css' %}" />
+
+        <link rel="stylesheet" type="text/css" href="https://www.ddmsdfl.cz/style/style.css" media="all" />
+        {% if backends %}
+        <!-- Bootstrap social -->
+        <link rel="stylesheet" type="text/css" media="all" href="{% static 'leprikon/lib/font-awesome/css/font-awesome.min.css' %}" />
+        <link rel="stylesheet" type="text/css" media="all" href="{% static 'leprikon/lib/bootstrap-social.min.css' %}" />
+        {% endif %}
+        {% render_block "css" %}
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="{% static 'leprikon/lib/jquery.min.js' %}"></script>
+
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="{% static 'leprikon/lib/bootstrap/js/bootstrap.min.js' %}"></script>
+
+        <style>
+            .btn-primary,
+            #str a.btn-primary {
+                color: #fff;
+                background-color: #00B050;
+                border-color: #2e6da4;
+                text-decoration: none;
+            }
+            .leprikon-nav {
+                margin-top: 5px;
+                font-size: 120%;
+            }
+            .multiselect-container.dropdown-menu input { visibility: hidden; }
+        </style>
+    </head>
+    <body>
+        {% cms_toolbar %}
+        <div id="nadpis" class="blueBack">
+            <div class="divCent">
+                <strong><a href="https://www.ddmsdfl.cz/">Dům dětí a mládeže a školní družina Františkovy Lázně</a></strong>
+                <span>Dlouhá 6, 351 01 Františkovy Lázně, IČ 47721880</span>
+            </div>
+        </div>
+        <div id="showTopMenuLink" onclick="nav.style.display='block'; this.style.display='none'"><img src="https://www.ddmsdfl.cz/images/menu.png" alt="Menu"></div>
+        <div id="nav">
+          <div class="divCent">
+            {% cache 300 topNav %}{% upstream 'https://www.ddmsdfl.cz/' '//nav[@id="topNav"]' '|href="/|href="https://www.ddmsdfl.cz/|' %}{% endcache %}
+          </div>
+        </div> <!-- nav -->
+
+        <div id="banner">
+        </div>
+        <div id="str" class="blueBack">
+            <div class="divCent row">
+                <div class="col-md-9">
+                    {% block content %}{% endblock %}
+                </div>
+                <div class="col-md-3">
+                    <div style="display: table-row;">
+                        <div style="display: table-cell">
+                            <strong>Uživatel</strong>
+                            {% include 'leprikon/user_dropdown.html' %}
+                        </div>
+                        <div style="display: table-cell; text-align: right;">
+                            <strong>Školní rok</strong>
+                            {% school_year_form %}
+                        </div>
+                    </div>
+                    {% show_menu 1 100 0 100 'menu.html' 'CMSMenu,LeprikonMenu' %}
+                </div>
+            </div>
+        </div> <!-- str -->
+
+        {% cache 300 footer %}
+        {% upstream 'https://www.ddmsdfl.cz/' '//div[@id="footer"]' '|href="/|href="https://www.ddmsdfl.cz/|' %}
+        {% upstream 'https://www.ddmsdfl.cz/' '//body/script' %}
+        {% endcache %}
+
+        {% render_block "js" %}
+    </body>
+</html>
+
