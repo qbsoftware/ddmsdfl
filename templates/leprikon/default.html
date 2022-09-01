@@ -23,8 +23,8 @@
         <link href="https://www.ddmsdfl.cz/images/favicon_32.png" sizes="32x32" rel="icon" type="image/png" />
         <link href="https://www.ddmsdfl.cz/images/favicon_32.png" rel="icon" type="image/png" />
 
-	<meta name="robots" content="index,follow" />
-	<meta name="googlebot" content="index,follow,snippet,archive" />
+        <meta name="robots" content="index,follow" />
+        <meta name="googlebot" content="index,follow,snippet,archive" />
         <title>{% block title %}{% endblock %} {% include 'leprikon/title.txt' %}</title>
         <!--<link href="https://www.ddmsdfl.cz/images/favicon.png" rel="icon" type="image/png" />-->
 
@@ -32,6 +32,8 @@
         <link rel="stylesheet" href="{% static 'leprikon/lib/bootstrap/css/bootstrap.min.css' %}" />
 
         <link rel="stylesheet" type="text/css" href="https://www.ddmsdfl.cz/style/style.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{% static 'leprikon/css/layout.css' %}" media="all" />
+
         {% if backends %}
         <!-- Bootstrap social -->
         <link rel="stylesheet" type="text/css" media="all" href="{% static 'leprikon/lib/font-awesome/css/font-awesome.min.css' %}" />
