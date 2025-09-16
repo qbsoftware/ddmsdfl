@@ -1,4 +1,3 @@
-version: '3.4'
 
 x-leprikon: &leprikon
   image: qbsoftware/ddmsdfl
@@ -7,6 +6,7 @@ x-leprikon: &leprikon
     - redis
     - smtprelay
   environment:
+    LEPRIKON_DOMAIN: ddmsdfl.cz
     DATABASE_ENGINE: django.db.backends.mysql
     DATABASE_HOST: ''
     DATABASE_NAME: ddmsdfl
@@ -59,7 +59,7 @@ services:
     image: juanluisbaptiste/postfix
     environment:
       SERVER_HOSTNAME: leprikon.cz
-      SMTP_SERVER: smtp.savana.cz
+      SMTP_SERVER: mail.webglobe.cz
       SMTP_PORT: 465
       SMTP_USERNAME: ddmsdfl@leprikon.cz
       SMTP_PASSWORD: emailpassword
