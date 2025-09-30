@@ -6,7 +6,7 @@ x-leprikon: &leprikon
     - redis
     - smtprelay
   environment:
-    LEPRIKON_DOMAIN: ddmsdfl.cz
+    LEPRIKON_DOMAIN: ddmsdfl.leprikon.cz
     DATABASE_ENGINE: django.db.backends.mysql
     DATABASE_HOST: ''
     DATABASE_NAME: ddmsdfl
